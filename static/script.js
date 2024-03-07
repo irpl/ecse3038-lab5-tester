@@ -279,7 +279,6 @@ async function getMessage() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       if (data.line_1 || data.line_2) {
         messageInput1.value = data.line_1;
         messageInput2.value = data.line_2;
