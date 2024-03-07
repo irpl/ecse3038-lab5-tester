@@ -25,22 +25,20 @@ async def get_message(api_key: Optional[str] = Header(None)):
     raise HTTPException(status_code=400, detail="API key missing")
 
   if api_key in messages:
-    return {"message": messages[api_key]}
+    return messages[api_key]
   else:
     raise HTTPException(status_code=404, detail="Message not found")
 
 
 @app.put("/message")
-async def update_or_create_message(message_data: dict,
-                                   api_key: Optional[str] = Header(None)):
+async def update_or_create_message(message_data: dict, api_key: Optional[str] = Header(None)):
   if not api_key:
     raise HTTPException(status_code=400, detail="API key missing")
 
-  if "message" not in message_data:
-    raise HTTPException(status_code=400,
-                        detail="Missing 'message' in request body")
+  if "messageLine1" not in message_data and "messageLine2" not in message_data:
+    raise HTTPException(status_code=400, detail="Missing 'message' in request body")
 
-  messages[api_key] = message_data["message"]
+  messages[api_key] = { "line_1": message_data["messageLine1"], "line_2": message_data["messageLine2"] } 
   return {"status": "Message updated or created"}
 
 

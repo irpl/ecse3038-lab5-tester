@@ -1,4 +1,6 @@
-const messageInput = document.getElementById('message-input');
+const messageInput1 = document.getElementById('message-input-1');
+const messageInput2 = document.getElementById('message-input-2');
+const messageInputs = document.getElementsByClassName("message-input");
 var names = [
   "Abe",
   "Abraham",
@@ -277,12 +279,17 @@ async function getMessage() {
     });
     if (response.ok) {
       const data = await response.json();
-      if (data.message) {
-        messageInput.value = data.message;
-        messageInput.style.color = 'black'; // Set text color to black
+      console.log(data)
+      if (data.line_1 || data.line_2) {
+        messageInput1.value = data.line_1;
+        messageInput2.value = data.line_2;
+        messageInput1.style.color = 'black'; // Set text color to black
+        messageInput2.style.color = 'black'; // Set text color to black
       } else {
-        messageInput.value = '';
-        messageInput.style.color = 'inherit'; // Reset text color to default
+        messageInput1.value = '';
+        messageInput2.value = '';
+        messageInput1.style.color = 'inherit'; // Reset text color to default
+        messageInput2.style.color = 'inherit'; // Reset text color to default
       }
     } else {
       console.error('Error fetching message:', response.statusText);
@@ -292,11 +299,14 @@ async function getMessage() {
   }
 }
 
-messageInput.addEventListener('keyup', async (event) => {
-  messageInput.style.color = 'black'; // Set text color to black
-  messageInput.style.borderColor = 'rgba(0, 0, 0, 0)'; // Set border to green
+async function handleSubmit(event) {
+  messageInput1.style.color = 'black'; // Set text color to black
+  messageInput2.style.color = 'black'; // Set text color to black
+  messageInput1.style.borderColor = 'rgba(0, 0, 0, 0)'; // Set border to green
+  messageInput2.style.borderColor = 'rgba(0, 0, 0, 0)'; // Set border to green
   if (event.key === 'Enter') {
-    const message = messageInput.value.trim();
+    const messageLine1 = messageInput1.value.trim();
+    const messageLine2 = messageInput2.value.trim();
     try {
       const response = await fetch('/message', {
         method: 'PUT',
@@ -304,20 +314,26 @@ messageInput.addEventListener('keyup', async (event) => {
           'Content-Type': 'application/json',
           'api-key': identifier,
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ messageLine1, messageLine2 }),
       });
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
       // messageInput.style.color = 'green'; // Set text color to black
-      messageInput.style.borderColor = 'green'; // Set border to green
+      messageInput1.style.borderColor = 'green'; // Set border to green
+      messageInput2.style.borderColor = 'green'; // Set border to green
     } catch (error) {
       console.error(error);
       // messageInput.style.color = 'red'; // Set text color to black
-      messageInput.style.borderColor = 'red'; // Set border to green
+      messageInput1.style.borderColor = 'red'; // Set border to green
+      messageInput2.style.borderColor = 'red'; // Set border to green
     }
   }
-});
+}
+
+for (var i = 0; i < messageInputs.length; i++) {
+  messageInputs[i].addEventListener('keyup', handleSubmit, false);
+}
 
 setIdentifier();
 getMessage();
