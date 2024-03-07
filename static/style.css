@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  margin-top: -100px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+#message-input {
+  background-color: #f0f0f0; /* Adjust background color if needed */
+  border: 1px solid rgba(0, 0, 0, 0);
+  outline: none;
+  font-size: 2em; /* Adjust font size as desired */
+  padding: 1rem;
+  max-width: 80%;
+  width: 800px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+
+
+.identifier {
+  background-color: #f0f0f0;
+  padding: 10px;
+  color: #333;
+  position: absolute;
+  margin: 20px;
+  top: 0;
+  left: 0;
+}
