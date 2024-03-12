@@ -23,7 +23,7 @@ messages = {}
 
 
 @app.get("/message")
-async def get_message(api_key: Annotated[str | None, Header(None)] = None):
+async def get_message(api_key: Annotated[str | None, Header()] = None):
   if not api_key:
     raise HTTPException(status_code=400, detail="API key missing")
 
@@ -36,7 +36,7 @@ async def get_message(api_key: Annotated[str | None, Header(None)] = None):
 @app.put("/message")
 async def update_or_create_message(message_data: dict,
                                    api_key: Annotated[str | None,
-                                                      Header(None)] = None):
+                                                      Header()] = None):
   if not api_key:
     raise HTTPException(status_code=400, detail="API key missing")
 
