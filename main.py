@@ -23,7 +23,7 @@ messages = {}
 
 
 @app.get("/message")
-async def get_message(api_key: Optional[str] = Header(None)):
+async def get_message(api_key: Annotated[str | None, Header(None)] = None):
   if not api_key:
     raise HTTPException(status_code=400, detail="API key missing")
 
