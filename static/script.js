@@ -305,6 +305,7 @@ async function handleSubmit(event) {
   messageInput1.style.borderColor = "rgba(0, 0, 0, 0)"; // Set border to green
   messageInput2.style.borderColor = "rgba(0, 0, 0, 0)"; // Set border to green
   submitButton.style.backgroundColor = "#f0f0f0";
+  submitButton.value = "Submit";
   if (event.key === "Enter" || event.type === "click") {
     const messageLine1 = messageInput1.value.trim();
     const messageLine2 = messageInput2.value.trim();
@@ -324,6 +325,7 @@ async function handleSubmit(event) {
       messageInput1.style.borderColor = "green"; // Set border to green
       messageInput2.style.borderColor = "green"; // Set border to green
       submitButton.style.backgroundColor = "green";
+      submitButton.value = "Sent!";
     } catch (error) {
       console.error(error);
       // messageInput.style.color = 'red'; // Set text color to black
