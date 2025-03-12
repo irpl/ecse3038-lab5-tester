@@ -26,8 +26,15 @@ body {
 }
 #message-input-2 {
   border-top: none;
+  margin-bottom: 20px;
 }
 
+#message-submit {
+  border: none;
+  padding: 20px 30px;
+  font-size: 1.5rem;
+  transition: background-color 0.2s, color 0.2s;
+}
 
 .identifier {
   background-color: #f0f0f0;
